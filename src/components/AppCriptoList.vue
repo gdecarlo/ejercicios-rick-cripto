@@ -1,15 +1,24 @@
 <template>
-  <input type="radio" id="rank" v-model="orden" :value="1" />
-  <label for="rank">Ordenar por ranking</label>
-  <input type="radio" id="name" v-model="orden" :value="2" />
-  <label for="name">Ordenar por nombre</label>
-  <p
-    v-for="(cripto, index) in listaFiltrada"
-    :key="index"
-    :class="{ top3: index <= 2 }"
-  >
+
+<div class="form-check">
+  <input type="radio" id="rank" v-model="orden" :value="1" class="form-check-input"/>
+  <label for="rank" class="form-check-label">Ordenar por ranking</label>
+</div>
+<div class="form-check">
+  <input type="radio" id="name" v-model="orden" :value="2" class="form-check-input"/>
+  <label for="name" class="form-check-label">Ordenar por nombre</label>
+</div>
+
+
+<div class="card" v-for="(cripto, index) in listaFiltrada"
+    :key="index">
+  <div class="card-body" :class="{ 'text-success': index <= 2 }">
     {{ cripto.name }} {{ cripto.changePercent24Hr > 0 ? "⬆️" : "⬇️" }}
-  </p>
+    <router-link :to="`/criptoView/${cripto.id}`">Ir</router-link>
+  </div>
+</div>
+
+  
 </template>
 
 <script setup>
